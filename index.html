@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trump- Home</title>
+    <link rel="icon" type="image/png" href="123.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(180deg, #000000 0%, #000211 50%, #02000a 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+/* Header */
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center children horizontally */
+    justify-content: center;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+}
+
+/* Logo button */
+.logo-button {
+    display: inline-block;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transform: translateX(10px); /* Shift slightly to the right */
+}
+
+/* Logo image */
+.logo-image {
+    height: 170px;
+    width: auto;
+    display: block;
+}
+
+
+
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #b905dd;
+            text-shadow: 0 0 5px #b905dd;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            color: #ffffff;
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        .cart-button-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .cart-button {
+            background: linear-gradient(45deg, #ff00ff, #ff66cc);
+            padding: 12px 24px;
+            border-radius: 5px;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #ffffff;
+            text-decoration: none;
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
+            transition: transform 0.2s, box-shadow 0.3s;
+        }
+
+        .cart-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.7);
+        }
+
+        .hero {
+            position: relative;
+            text-align: center;
+            padding: 60px 0;
+            margin: 20px 0;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #b905dd;
+            text-shadow: 0 0 10px #b905dd;
+        }
+
+        .hero a {
+            background: linear-gradient(45deg, #b905dd, #5b3be3);
+            padding: 15px 30px;
+            border-radius: 5px;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.2rem;
+            box-shadow: 0 0 10px rgba(0, 234, 255, 0.5);
+        }
+
+        .bestsellers {
+            margin: 40px 0;
+        }
+
+        .bestsellers h2 {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #b905dd;
+            text-shadow: 0 0 10px #b905dd;
+        }
+
+        .product-carousel {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .product-slide {
+            flex: 0 0 50%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .product-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            transition: box-shadow 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .product-card:hover {
+            box-shadow: 0 0 15px rgba(0, 234, 255, 0.5);
+        }
+
+        .sold-out-label {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: linear-gradient(45deg, #ff4444, #ff8888); /* Red gradient for sold out */
+            color: #ffffff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+            z-index: 10;
+        }
+
+        .in-stock-label {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: linear-gradient(45deg, #00cc00, #66ff66); /* Green gradient for in stock */
+            color: #ffffff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+            z-index: 10;
+        }
+
+        .product-card .product-image-carousel {
+            position: relative;
+            width: 100%;
+            height: 150px;
+            overflow: hidden;
+        }
+
+        .product-card .product-image-inner {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .product-card .product-image {
+            width: 100%;
+            height: 150px;
+            object-fit: contain;
+            border-radius: 5px;
+            flex: 0 0 100%;
+        }
+
+        .product-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .product-card p {
+            font-size: 1rem;
+            color: #cccccc;
+            margin-bottom: 10px;
+        }
+
+        .product-card .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: #ffffff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            border-radius: 5px;
+        }
+
+        .product-card .carousel-arrow.left {
+            left: 5px;
+        }
+
+        .product-card .carousel-arrow.right {
+            right: 5px;
+        }
+
+        .carousel-nav {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .carousel-dot.active {
+            background: #b905dd;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 600px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 0 15px rgba(163, 0, 155, 0.5);
+        }
+
+        .popup-content .popup-image-carousel {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .popup-content .popup-image-inner {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .popup-content .popup-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 5px;
+            flex: 0 0 100%;
+        }
+
+        .popup-content .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: #ffffff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            border-radius: 5px;
+        }
+
+        .popup-content .carousel-arrow.left {
+            left: 5px;
+        }
+
+        .popup-content .carousel-arrow.right {
+            right: 5px;
+        }
+
+        .popup-content .error-message {
+            color: #ff4444;
+            font-size: 1rem;
+            margin-bottom: 10px;
+            display: none;
+        }
+
+        .popup-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #b905dd;
+            text-shadow: 0 0 5px #b905dd;
+        }
+
+        .popup-content p.description {
+            font-size: 1rem;
+            color: #cccccc;
+            margin-bottom: 15px;
+        }
+
+        .popup-content .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .popup-content select, .popup-content input[type="number"] {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #b905dd;
+            color: #000000;
+            padding: 8px;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        .popup-content .price {
+            font-size: 1.2rem;
+            color: #cccccc;
+            margin-bottom: 15px;
+        }
+
+        .popup-content button {
+            background: linear-gradient(45deg, #b905dd, #5b3be3);
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: #ffffff;
+            border: none;
+            box-shadow: 0 0 10px rgba(0, 234, 255, 0.5);
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+
+        .popup-content button:hover {
+            transform: scale(1.05);
+        }
+
+        .close-popup {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.5rem;
+            color: #ffffff;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            margin-top: 40px;
+        }
+
+        footer a {
+            color: #b905dd;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            nav {
+                display: none;
+            }
+
+            nav.active {
+                display: block;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: rgba(11, 15, 26, 0.9);
+                padding: 20px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero a {
+                font-size: 1rem;
+                padding: 10px 20px;
+            }
+
+            .product-carousel {
+                max-width: 100%;
+            }
+
+            .product-slide {
+                flex: 0 0 100%;
+            }
+
+            .product-card .product-image-carousel {
+                height: 150px;
+            }
+
+            .product-card .product-image {
+                height: 150px;
+            }
+
+            .popup-content {
+                width: 95%;
+            }
+
+            .popup-content .popup-image-carousel {
+                height: 200px;
+            }
+
+            .popup-content .popup-image {
+                height: 200px;
+            }
+
+            .cart-button {
+                padding: 10px 20px;
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .product-slide {
+                flex: 0 0 50%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="cart-button-container">
+                <a href="cart.html" class="cart-button">🛒</a>
+            </div>
+            <a href="index.html" class="logo-button">
+                <img src="123.png" alt="Logo" class="logo-image">
+            </a>
+            <div class="menu-toggle">☰</div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>QUALITY CRAFTED</h1>
+            <a href="shop.html">Shop Now</a>
+        </div>
+    </section>
+
+    <section class="bestsellers">
+        <div class="container">
+            <h2>The Best Seller</h2>
+            <div class="product-carousel">
+                <div class="carousel-inner">
+                    <div class="product-slide">
+                        <div class="product-card" data-name="Galaxy T-Shirt" data-price="25.00" data-description="A vibrant T-shirt with a cosmic design." data-images='["dpsy.png","https://via.placeholder.com/200/ff4444/ffffff?text=Galaxy+T-Shirt+2","https://via.placeholder.com/200/ff8888/ffffff?text=Galaxy+T-Shirt+3","https://via.placeholder.com/200/ffcccc/ffffff?text=Galaxy+T-Shirt+4","https://via.placeholder.com/200/aa0000/ffffff?text=Galaxy+T-Shirt+5","https://via.placeholder.com/200/ee0000/ffffff?text=Galaxy+T-Shirt+6"]'>
+                            <span class="in-stock-label">In Stock</span>
+                            <div class="product-image-carousel">
+                                <div class="product-image-inner">
+                                    <img class="product-image" src="dpsy.png" alt="Galaxy T-Shirt">
+                                    <img class="product-image" src="https://via.placeholder.com/200/ff4444/ffffff?text=Galaxy+T-Shirt+2" alt="Galaxy T-Shirt">
+                                    <img class="product-image" src="https://via.placeholder.com/200/ff8888/ffffff?text=Galaxy+T-Shirt+3" alt="Galaxy T-Shirt">
+                                    <img class="product-image" src="https://via.placeholder.com/200/ffcccc/ffffff?text=Galaxy+T-Shirt+4" alt="Galaxy T-Shirt">
+                                    <img class="product-image" src="https://via.placeholder.com/200/aa0000/ffffff?text=Galaxy+T-Shirt+5" alt="Galaxy T-Shirt">
+                                    <img class="product-image" src="https://via.placeholder.com/200/ee0000/ffffff?text=Galaxy+T-Shirt+6" alt="Galaxy T-Shirt">
+                                </div>
+                                <button class="carousel-arrow left">&larr;</button>
+                                <button class="carousel-arrow right">&rarr;</button>
+                            </div>
+                            <h3>Galaxy T-Shirt</h3>
+                            <p>$25.00</p>
+                        </div>
+                    </div>
+                    <div class="product-slide">
+                        <div class="product-card" data-name="Nebula Hoodie" data-price="45.00" data-description="A cozy hoodie with a nebula-inspired print." data-images='["https://via.placeholder.com/200/00ff00/ffffff?text=Nebula+Hoodie+1","https://via.placeholder.com/200/44ff44/ffffff?text=Nebula+Hoodie+2","https://via.placeholder.com/200/88ff88/ffffff?text=Nebula+Hoodie+3","https://via.placeholder.com/200/ccffcc/ffffff?text=Nebula+Hoodie+4","https://via.placeholder.com/200/00aa00/ffffff?text=Nebula+Hoodie+5","https://via.placeholder.com/200/00ee00/ffffff?text=Nebula+Hoodie+6"]'>
+                            <span class="in-stock-label">IN</span>
+                            <div class="product-image-carousel">
+                                <div class="product-image-inner">
+                                    <img class="product-image" src="https://via.placeholder.com/200/00ff00/ffffff?text=Nebula+Hoodie+1" alt="Nebula Hoodie">
+                                    <img class="product-image" src="https://via.placeholder.com/200/44ff44/ffffff?text=Nebula+Hoodie+2" alt="Nebula Hoodie">
+                                    <img class="product-image" src="https://via.placeholder.com/200/88ff88/ffffff?text=Nebula+Hoodie+3" alt="Nebula Hoodie">
+                                    <img class="product-image" src="https://via.placeholder.com/200/ccffcc/ffffff?text=Nebula+Hoodie+4" alt="Nebula Hoodie">
+                                    <img class="product-image" src="https://via.placeholder.com/200/00aa00/ffffff?text=Nebula+Hoodie+5" alt="Nebula Hoodie">
+                                    <img class="product-image" src="https://via.placeholder.com/200/00ee00/ffffff?text=Nebula+Hoodie+6" alt="Nebula Hoodie">
+                                </div>
+                                <button class="carousel-arrow left">&larr;</button>
+                                <button class="carousel-arrow right">&rarr;</button>
+                            </div>
+                            <h3>Nebula Hoodie</h3>
+                            <p>$45.00</p>
+                        </div>
+                    </div>
+                    <div class="product-slide">
+                        <div class="product-card" data-name="Starlight T-Shirt" data-price="28.00" data-description="A sleek T-shirt with glowing star patterns." data-images='["https://via.placeholder.com/200/0000ff/ffffff?text=Starlight+T-Shirt+1","https://via.placeholder.com/200/4444ff/ffffff?text=Starlight+T-Shirt+2","https://via.placeholder.com/200/8888ff/ffffff?text=Starlight+T-Shirt+3","https://via.placeholder.com/200/ccccff/ffffff?text=Starlight+T-Shirt+4","https://via.placeholder.com/200/0000aa/ffffff?text=Starlight+T-Shirt+5","https://via.placeholder.com/200/0000ee/ffffff?text=Starlight+T-Shirt+6"]'>
+                            <span class="in-stock-label">In Stock</span>
+                            <div class="product-image-carousel">
+                                <div class="product-image-inner">
+                                    <img class="product-image" src="https://via.placeholder.com/200/0000ff/ffffff?text=Starlight+T-Shirt+1" alt="Starlight T-Shirt">
+                                    <img class="product-image" src="https://via.placeholder.com/200/4444ff/ffffff?text=Starlight+T-Shirt+2" alt="Starlight T-Shirt">
+                                    <img class="product-image" src="https://via.placeholder.com/200/8888ff/ffffff?text=Starlight+T-Shirt+3" alt="Starlight T-Shirt">
+                                    <img class="product-image" src="https://via.placeholder.com/200/ccccff/ffffff?text=Starlight+T-Shirt+4" alt="Starlight T-Shirt">
+                                    <img class="product-image" src="https://via.placeholder.com/200/0000aa/ffffff?text=Starlight+T-Shirt+5" alt="Starlight T-Shirt">
+                                    <img class="product-image" src="https://via.placeholder.com/200/0000ee/ffffff?text=Starlight+T-Shirt+6" alt="Starlight T-Shirt">
+                                </div>
+                                <button class="carousel-arrow left">&larr;</button>
+                                <button class="carousel-arrow right">&rarr;</button>
+                            </div>
+                            <h3>Starlight T-Shirt</h3>
+                            <p>$28.00</p>
+                        </div>
+                    </div>
+                    <div class="product-slide">
+                        <div class="product-card" data-name="Cosmic Hoodie" data-price="50.00" data-description="A premium hoodie with a galaxy gradient." data-images='["dpsy.png","https://via.placeholder.com/200/ffff44/ffffff?text=Cosmic+Hoodie+2","https://via.placeholder.com/200/ffff88/ffffff?text=Cosmic+Hoodie+3","https://via.placeholder.com/200/ffffcc/ffffff?text=Cosmic+Hoodie+4","https://via.placeholder.com/200/aaaa00/ffffff?text=Cosmic+Hoodie+5","https://via.placeholder.com/200/eeee00/ffffff?text=Cosmic+Hoodie+6"]'>
+                            <span class="sold-out-label">Sold Out</span>
+                            <div class="product-image-carousel">
+                                <div class="product-image-inner">
+                                    <img class="product-image" src="https://via.placeholder.com/200/ffff00/ffffff?text=Cosmic+Hoodie+1" alt="Cosmic Hoodie">
+                                    <img class="product-image" src="https://via.placeholder.com/200/ffff44/ffffff?text=Cosmic+Hoodie+2" alt="Cosmic Hoodie">
+                                    <img class="product-image" src="https://via.placeholder.com/200/ffff88/ffffff?text=Cosmic+Hoodie+3" alt="Cosmic Hoodie">
+                                    <img class="product-image" src="https://via.placeholder.com/200/ffffcc/ffffff?text=Cosmic+Hoodie+4" alt="Cosmic Hoodie">
+                                    <img class="product-image" src="https://via.placeholder.com/200/aaaa00/ffffff?text=Cosmic+Hoodie+5" alt="Cosmic Hoodie">
+                                    <img class="product-image" src="https://via.placeholder.com/200/eeee00/ffffff?text=Cosmic+Hoodie+6" alt="Cosmic Hoodie">
+                                </div>
+                                <button class="carousel-arrow left">&larr;</button>
+                                <button class="carousel-arrow right">&rarr;</button>
+                            </div>
+                            <h3>Cosmic Hoodie</h3>
+                            <p>$50.00</p>
+                        </div>
+                    </div>
+                    <div class="product-slide">
+                        <div class="product-card" data-name="Meteor Jacket" data-price="65.00" data-description="A sleek jacket with a meteor-inspired design." data-images='["https://via.placeholder.com/200/ff00ff/ffffff?text=Meteor+Jacket+1","https://via.placeholder.com/200/ff44ff/ffffff?text=Meteor+Jacket+2","https://via.placeholder.com/200/ff88ff/ffffff?text=Meteor+Jacket+3","https://via.placeholder.com/200/ffccff/ffffff?text=Meteor+Jacket+4","https://via.placeholder.com/200/aa00aa/ffffff?text=Meteor+Jacket+5","https://via.placeholder.com/200/ee00ee/ffffff?text=Meteor+Jacket+6"]'>
+                            <span class="sold-out-label">Sold Out</span>
+                            <div class="product-image-carousel">
+                                <div class="product-image-inner">
+                                    <img class="product-image" src="https://via.placeholder.com/200/ff00ff/ffffff?text=Meteor+Jacket+1" alt="Meteor Jacket">
+                                    <img class="product-image" src="https://via.placeholder.com/200/ff44ff/ffffff?text=Meteor+Jacket+2" alt="Meteor Jacket">
+                                    <img class="product-image" src="https://via.placeholder.com/200/ff88ff/ffffff?text=Meteor+Jacket+3" alt="Meteor Jacket">
+                                    <img class="product-image" src="https://via.placeholder.com/200/ffccff/ffffff?text=Meteor+Jacket+4" alt="Meteor Jacket">
+                                    <img class="product-image" src="https://via.placeholder.com/200/aa00aa/ffffff?text=Meteor+Jacket+5" alt="Meteor Jacket">
+                                    <img class="product-image" src="https://via.placeholder.com/200/ee00ee/ffffff?text=Meteor+Jacket+6" alt="Meteor Jacket">
+                                </div>
+                                <button class="carousel-arrow left">&larr;</button>
+                                <button class="carousel-arrow right">&rarr;</button>
+                            </div>
+                            <h3>Meteor Jacket</h3>
+                            <p>$65.00</p>
+                        </div>
+                    </div>
+                    <div class="product-slide">
+                        <div class="product-card" data-name="Orbit Cap" data-price="20.00" data-description="A stylish cap with an orbital pattern." data-images='["https://via.placeholder.com/200/00ffff/ffffff?text=Orbit+Cap+1","https://via.placeholder.com/200/44ffff/ffffff?text=Orbit+Cap+2","https://via.placeholder.com/200/88ffff/ffffff?text=Orbit+Cap+3","https://via.placeholder.com/200/ccffff/ffffff?text=Orbit+Cap+4","https://via.placeholder.com/200/00aaaa/ffffff?text=Orbit+Cap+5","https://via.placeholder.com/200/00eeee/ffffff?text=Orbit+Cap+6"]'>
+                            <span class="in-stock-label">In Stock</span>
+                            <div class="product-image-carousel">
+                                <div class="product-image-inner">
+                                    <img class="product-image" src="https://via.placeholder.com/200/00ffff/ffffff?text=Orbit+Cap+1" alt="Orbit Cap">
+                                    <img class="product-image" src="https://via.placeholder.com/200/44ffff/ffffff?text=Orbit+Cap+2" alt="Orbit Cap">
+                                    <img class="product-image" src="https://via.placeholder.com/200/88ffff/ffffff?text=Orbit+Cap+3" alt="Orbit Cap">
+                                    <img class="product-image" src="https://via.placeholder.com/200/ccffff/ffffff?text=Orbit+Cap+4" alt="Orbit Cap">
+                                    <img class="product-image" src="https://via.placeholder.com/200/00aaaa/ffffff?text=Orbit+Cap+5" alt="Orbit Cap">
+                                    <img class="product-image" src="https://via.placeholder.com/200/00eeee/ffffff?text=Orbit+Cap+6" alt="Orbit Cap">
+                                </div>
+                                <button class="carousel-arrow left">&larr;</button>
+                                <button class="carousel-arrow right">&rarr;</button>
+                            </div>
+                            <h3>Orbit Cap</h3>
+                            <p>$20.00</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-nav">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="popup" id="product-popup">
+        <div class="popup-content">
+            <span class="close-popup">&times;</span>
+            <div class="popup-image-carousel">
+                <div class="popup-image-inner" id="popup-image-inner"></div>
+                <button class="carousel-arrow left" id="popup-left-arrow">&larr;</button>
+                <button class="carousel-arrow right" id="popup-right-arrow">&rarr;</button>
+            </div>
+            <p class="error-message" id="error-message"></p>
+            <h3 id="popup-name"></h3>
+            <p class="description" id="popup-description"></p>
+            <div class="options">
+                <select id="popup-size" required>
+                    <option value="" disabled selected>Select Size</option>
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                    <option value="XL">XL</option>
+                </select>
+                <input type="number" id="popup-quantity" min="1" value="1">
+            </div>
+            <p class="price" id="popup-price"></p>
+            <button id="popup-add-to-cart">Add to Cart</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>
+                <a href="https://wa.me/1234567890">WhatsApp</a> |
+                <a href="https://www.instagram.com/ttrump_eg/">ttrump_eg</a> |
+                <a href="mailto:support@l8streetwear.com">Email</a> |
+                <a href="#">Shipping Policy</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.menu-toggle').addEventListener('click', () => {
+            document.querySelector('nav').classList.toggle('active');
+        });
+
+        // Product carousel functionality (for the bestsellers section)
+        const productSlides = document.querySelectorAll('.product-slide');
+        const carouselInner = document.querySelector('.carousel-inner');
+        const carouselNav = document.querySelector('.carousel-nav');
+        const mediaQuery = window.matchMedia("(max-width: 768px)");
+        let slidesPerView = mediaQuery.matches ? 1 : 2;
+        let currentProductSlide = 0;
+        const totalSlides = productSlides.length;
+        const totalDots = Math.ceil(totalSlides / slidesPerView);
+        let productSlideInterval = setInterval(nextProductSlide, 5000);
+
+        // Create dots dynamically
+        carouselNav.innerHTML = '';
+        for (let i = 0; i < totalDots; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('carousel-dot');
+            if (i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => {
+                clearInterval(productSlideInterval);
+                goToProductSlide(i);
+                productSlideInterval = setInterval(nextProductSlide, 5000);
+            });
+            carouselNav.appendChild(dot);
+        }
+        const productDots = document.querySelectorAll('.carousel-dot');
+
+        function updateCarousel() {
+            const slideWidthPercent = 100 / slidesPerView;
+            const offset = currentProductSlide * slideWidthPercent;
+            carouselInner.style.transform = `translateX(-${offset}%)`;
+            productDots.forEach(dot => dot.classList.remove('active'));
+            productDots[Math.floor(currentProductSlide / slidesPerView)].classList.add('active');
+        }
+
+        function nextProductSlide() {
+            currentProductSlide = (currentProductSlide + slidesPerView) % totalSlides;
+            updateCarousel();
+        }
+
+        function goToProductSlide(n) {
+            currentProductSlide = n * slidesPerView;
+            if (currentProductSlide >= totalSlides) {
+                currentProductSlide = 0;
+            }
+            updateCarousel();
+        }
+
+        // Add swipe for product carousel
+        const productCarousel = document.querySelector('.product-carousel');
+        let startXProduct, endXProduct;
+        productCarousel.addEventListener('touchstart', (e) => {
+            startXProduct = e.touches[0].clientX;
+        });
+        productCarousel.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+        });
+        productCarousel.addEventListener('touchend', (e) => {
+            endXProduct = e.changedTouches[0].clientX;
+            const deltaX = endXProduct - startXProduct;
+            const threshold = 50;
+            clearInterval(productSlideInterval);
+            if (deltaX > threshold) {
+                // swipe right, previous
+                currentProductSlide = (currentProductSlide - slidesPerView + totalSlides) % totalSlides;
+            } else if (deltaX < -threshold) {
+                // swipe left, next
+                currentProductSlide = (currentProductSlide + slidesPerView) % totalSlides;
+            }
+            updateCarousel();
+            productSlideInterval = setInterval(nextProductSlide, 5000);
+        });
+
+        updateCarousel();
+
+        // Individual product image carousel functionality
+        const productCards = document.querySelectorAll('.product-card');
+        productCards.forEach(card => {
+            const imageInner = card.querySelector('.product-image-inner');
+            const images = card.querySelectorAll('.product-image');
+            const leftArrow = card.querySelector('.carousel-arrow.left');
+            const rightArrow = card.querySelector('.carousel-arrow.right');
+            const imageCarousel = card.querySelector('.product-image-carousel');
+            let currentImageIndex = 0;
+            let startXImage, endXImage;
+
+            function updateImageCarousel() {
+                imageInner.style.transform = `translateX(-${currentImageIndex * 100}%)`;
+            }
+
+            leftArrow.addEventListener('click', () => {
+                currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+                updateImageCarousel();
+            });
+
+            rightArrow.addEventListener('click', () => {
+                currentImageIndex = (currentImageIndex + 1) % images.length;
+                updateImageCarousel();
+            });
+
+            // Add swipe for product image carousel
+            imageCarousel.addEventListener('touchstart', (e) => {
+                startXImage = e.touches[0].clientX;
+            });
+            imageCarousel.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+            });
+            imageCarousel.addEventListener('touchend', (e) => {
+                endXImage = e.changedTouches[0].clientX;
+                const deltaX = endXImage - startXImage;
+                const threshold = 50;
+                if (deltaX > threshold) {
+                    // swipe right, previous
+                    currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+                } else if (deltaX < -threshold) {
+                    // swipe left, next
+                    currentImageIndex = (currentImageIndex + 1) % images.length;
+                }
+                updateImageCarousel();
+            });
+
+            updateImageCarousel();
+        });
+
+        // Popup functionality
+        const popup = document.getElementById('product-popup');
+        const popupImageInner = document.getElementById('popup-image-inner');
+        const popupName = document.getElementById('popup-name');
+        const popupDescription = document.getElementById('popup-description');
+        const popupPrice = document.getElementById('popup-price');
+        const popupSize = document.getElementById('popup-size');
+        const popupQuantity = document.getElementById('popup-quantity');
+        const addToCartButton = document.getElementById('popup-add-to-cart');
+        const closePopup = document.querySelector('.close-popup');
+        const popupLeftArrow = document.getElementById('popup-left-arrow');
+        const popupRightArrow = document.getElementById('popup-right-arrow');
+        const errorMessage = document.getElementById('error-message');
+        const popupImageCarousel = document.querySelector('.popup-image-carousel');
+        let popupImages = [];
+        let popupCurrentImageIndex = 0;
+        let startXPopup, endXPopup;
+
+        productCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const name = card.getAttribute('data-name');
+                const price = card.getAttribute('data-price');
+                const description = card.getAttribute('data-description');
+                const images = JSON.parse(card.getAttribute('data-images'));
+
+                // Populate popup carousel
+                popupImageInner.innerHTML = '';
+                images.forEach((src, index) => {
+                    const img = document.createElement('img');
+                    img.className = 'popup-image';
+                    img.src = src;
+                    img.alt = `${name} ${index + 1}`;
+                    popupImageInner.appendChild(img);
+                });
+
+                popupImages = images;
+                popupCurrentImageIndex = 0;
+                popupName.textContent = name;
+                popupDescription.textContent = description;
+                popupPrice.textContent = `$${price}`;
+                popupSize.value = '';
+                popupQuantity.value = '1';
+                errorMessage.style.display = 'none';
+                updatePopupCarousel();
+                popup.style.display = 'flex';
+            });
+        });
+
+        function updatePopupCarousel() {
+            popupImageInner.style.transform = `translateX(-${popupCurrentImageIndex * 100}%)`;
+        }
+
+        popupLeftArrow.addEventListener('click', () => {
+            popupCurrentImageIndex = (popupCurrentImageIndex - 1 + popupImages.length) % popupImages.length;
+            updatePopupCarousel();
+        });
+
+        popupRightArrow.addEventListener('click', () => {
+            popupCurrentImageIndex = (popupCurrentImageIndex + 1) % popupImages.length;
+            updatePopupCarousel();
+        });
+
+        // Add swipe for popup image carousel
+        popupImageCarousel.addEventListener('touchstart', (e) => {
+            startXPopup = e.touches[0].clientX;
+        });
+        popupImageCarousel.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+        });
+        popupImageCarousel.addEventListener('touchend', (e) => {
+            endXPopup = e.changedTouches[0].clientX;
+            const deltaX = endXPopup - startXPopup;
+            const threshold = 50;
+            if (deltaX > threshold) {
+                // swipe right, previous
+                popupCurrentImageIndex = (popupCurrentImageIndex - 1 + popupImages.length) % popupImages.length;
+            } else if (deltaX < -threshold) {
+                // swipe left, next
+                popupCurrentImageIndex = (popupCurrentImageIndex + 1) % popupImages.length;
+            }
+            updatePopupCarousel();
+        });
+
+        closePopup.addEventListener('click', () => {
+            popup.style.display = 'none';
+        });
+
+        popup.addEventListener('click', (e) => {
+            if (e.target === popup) {
+                popup.style.display = 'none';
+            }
+        });
+
+        addToCartButton.addEventListener('click', () => {
+            const size = popupSize.value;
+            const quantity = parseInt(popupQuantity.value);
+
+            errorMessage.style.display = 'none';
+
+            if (!size) {
+                errorMessage.textContent = 'Please select a size.';
+                errorMessage.style.display = 'block';
+                return;
+            }
+            if (quantity < 1) {
+                errorMessage.textContent = 'Please select a valid quantity.';
+                errorMessage.style.display = 'block';
+                return;
+            }
+
+            const item = {
+                name: popupName.textContent,
+                price: parseFloat(popupPrice.textContent.replace('$', '')),
+                size: size,
+                quantity: quantity,
+                image: popupImages[0] // Use first image for cart
+            };
+
+            try {
+                let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+                cart.push(item);
+                localStorage.setItem('cart', JSON.stringify(cart));
+                popup.style.display = 'none';
+                window.location.href = 'cart.html';
+            } catch (error) {
+                console.error('Error saving to localStorage:', error);
+                alert('An error occurred while adding to cart. Please try again.');
+            }
+        });
+    </script>
+</body>
+</html>

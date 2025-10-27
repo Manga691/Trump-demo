@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trump - Checkout</title>
+    <link rel="icon" type="image/png" href="123.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(180deg, #000000 0%, #000211 50%, #02000a 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center children horizontally */
+            justify-content: center;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+        }
+
+        /* Logo button */
+        .logo-button {
+            display: inline-block;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transform: translateX(20px); /* Shift slightly to the right */
+        }
+
+        /* Logo image */
+        .logo-image {
+            height: 130px;
+            width: auto;
+            display: block;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #b905dd;
+            text-shadow: 0 0 5px #b905dd;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            color: #ffffff;
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        .cart-button-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .cart-button {
+            background: linear-gradient(45deg, #ff00ff, #ff66cc);
+            padding: 12px 24px;
+            border-radius: 5px;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #ffffff;
+            text-decoration: none;
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
+            transition: transform 0.2s, box-shadow 0.3s;
+        }
+
+        .cart-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.7);
+        }
+
+        .checkout-section {
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .checkout-section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #b905dd;
+            text-shadow: 0 0 10px #b905dd;
+        }
+
+        .checkout-form {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 30px;
+            max-width: 600px;
+            margin: 0 auto;
+            transition: box-shadow 0.3s;
+        }
+
+        .checkout-form:hover {
+            box-shadow: 0 0 15px rgba(0, 234, 255, 0.5);
+        }
+
+        .checkout-form label {
+            display: block;
+            font-size: 1rem;
+            margin-bottom: 5px;
+            color: #cccccc;
+            text-align: left;
+        }
+
+        .checkout-form input {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #b905dd;
+            color: #000000;
+            padding: 10px;
+            border-radius: 5px;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .checkout-form button {
+            background: linear-gradient(45deg, #b905dd, #5b3be3);
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            color: #ffffff;
+            cursor: pointer;
+            text-shadow: 0 0 5px #000000;
+            box-shadow: 0 0 10px rgba(0, 234, 255, 0.5);
+            transition: transform 0.2s;
+        }
+
+        .checkout-form button:hover {
+            transform: scale(1.05);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            margin-top: 40px;
+        }
+
+        footer a {
+            color: #b905dd;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            nav {
+                display: none;
+            }
+
+            nav.active {
+                display: block;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: rgba(11, 15, 26, 0.9);
+                padding: 20px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+
+            .checkout-form {
+                padding: 20px;
+            }
+
+            .checkout-form label, .checkout-form input {
+                font-size: 1rem;
+            }
+
+            .cart-button {
+                padding: 10px 20px;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="cart-button-container">
+                <a href="cart.html" class="cart-button">🛒</a>
+            </div>
+            <a href="index.html" class="logo-button">
+                <img src="123.png" alt="Logo" class="logo-image">
+            </a>
+            <div class="menu-toggle">☰</div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="checkout-section">
+        <div class="container">
+            <h2>Checkout</h2>
+            <form class="checkout-form" id="checkout-form">
+                <label for="first-name">First Name (required)</label>
+                <input type="text" id="first-name" required>
+
+                <label for="email">Email (required)</label>
+                <input type="email" id="email" required>
+
+                <label for="last-name">Last Name (required)</label>
+                <input type="text" id="last-name" required>
+
+                <label for="phone1">First Phone Number (required)</label>
+                <input type="tel" id="phone1" required>
+
+                <label for="phone2">Second Phone Number (optional)</label>
+                <input type="tel" id="phone2">
+
+                <label for="city">City (required)</label>
+                <input type="text" id="city" required>
+
+                <label for="address">Address (required)</label>
+                <input type="text" id="address" required>
+
+                <label for="google-location">Google Location (optional)</label>
+                <input type="text" id="google-location">
+
+                <label for="building-num">Building Number (required)</label>
+                <input type="text" id="building-num" required>
+
+                <label for="floor-num">Floor Number (required)</label>
+                <input type="text" id="floor-num" required>
+
+                <label for="apartment-num">Apartment Number (required)</label>
+                <input type="text" id="apartment-num" required>
+
+                <button type="submit">Place Order</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>
+                <a href="https://wa.me/1234567890">WhatsApp</a> |
+                <a href="https://instagram.com/l8streetwear">Instagram</a> |
+                <a href="mailto:support@l8streetwear.com">Email</a> |
+                <a href="#">Shipping Policy</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.menu-toggle').addEventListener('click', () => {
+            document.querySelector('nav').classList.toggle('active');
+        });
+
+        // Function to generate a random 6-digit order ID
+        function generateOrderId() {
+            return Math.floor(100000 + Math.random() * 900000).toString();
+        }
+
+        const coupons = Array.from({length: 50}, (_, i) => `L8COUPON${(i + 1).toString().padStart(2, '0')}`.toUpperCase());
+
+        // Form submission to Discord webhook
+        document.getElementById('checkout-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // Retrieve form data
+            const firstName = document.getElementById('first-name').value;
+            const email = document.getElementById('email').value;
+            const lastName = document.getElementById('last-name').value;
+            const phone1 = document.getElementById('phone1').value;
+            const phone2 = document.getElementById('phone2').value;
+            const city = document.getElementById('city').value;
+            const address = document.getElementById('address').value;
+            const googleLocation = document.getElementById('google-location').value;
+            const buildingNum = document.getElementById('building-num').value;
+            const floorNum = document.getElementById('floor-num').value;
+            const apartmentNum = document.getElementById('apartment-num').value;
+
+            // Generate random 6-digit order ID
+            const orderId = generateOrderId();
+
+            // Retrieve cart items from localStorage
+            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            let cartDetails = '';
+            let subtotal = 0;
+
+            // Generate cart items details
+            if (cart.length > 0) {
+                cartDetails = cart.map((item, index) => {
+                    const itemTotal = item.price * item.quantity;
+                    subtotal += itemTotal;
+                    return `${index + 1}. ${item.name} (Size: ${item.size}, Quantity: ${item.quantity}, Price: $${itemTotal.toFixed(2)})`;
+                }).join('\n');
+            } else {
+                cartDetails = 'No items in cart.';
+            }
+
+            // Calculate total with discount (if any)
+            let discount = 0;
+            const appliedCoupon = localStorage.getItem('appliedCoupon');
+            if (appliedCoupon && coupons.includes(appliedCoupon.toUpperCase())) {
+                discount = subtotal * 0.25; // 25% discount
+            }
+            const shipping = 65.00;
+            const total = subtotal - discount + shipping;
+
+            // Save order details to localStorage for confirmation page
+            const orderDetails = {
+                orderId,
+                firstName,
+                email,
+                lastName,
+                phone1,
+                phone2,
+                city,
+                address,
+                googleLocation,
+                buildingNum,
+                floorNum,
+                apartmentNum,
+                cart
+            };
+            localStorage.setItem('lastOrder', JSON.stringify(orderDetails));
+
+            // Construct the message for Discord webhook
+            const message = `@everyone\n**New Order Details (Order ID: ${orderId})**\n\n**Customer Information:**\n1. First Name: ${firstName}\n2. Email: ${email}\n3. Last Name: ${lastName}\n4. First Phone Number: ${phone1}\n5. Second Phone Number: ${phone2 || 'N/A'}\n6. City: ${city}\n7. Address: ${address}\n8. Google Location: ${googleLocation || 'N/A'}\n9. Building Number: ${buildingNum}\n10. Floor Number: ${floorNum}\n11. Apartment Number: ${apartmentNum}\n\n**Cart Items:**\n${cartDetails}\n\n**Order Summary:**\nSubtotal: $${subtotal.toFixed(2)}\nDiscount: -$${discount.toFixed(2)}\nShipping: $${shipping.toFixed(2)}\nTotal: $${total.toFixed(2)}`;
+
+            // Send to Discord webhook
+            fetch('https://discord.com/api/webhooks/1432083878742331493/S2ctf0Nx6GS_gKK34TTVC1JGf39ml6Gjysjz0FDq9odHs1OWfBTfUQ518MvelThRhyqZ', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ content: message }),
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Clear cart and coupon after successful order
+                    localStorage.removeItem('cart');
+                    localStorage.removeItem('appliedCoupon');
+                    // Redirect to confirmation page
+                    window.location.href = 'order-confirmation.html';
+                } else {
+                    console.error('Error placing order.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>

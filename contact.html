@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trump- Contact</title>
+    <link rel="icon" type="image/png" href="123.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(180deg, #000000 0%, #000211 50%, #02000a 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center children horizontally */
+            justify-content: center;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+        }
+
+        /* Logo button */
+        .logo-button {
+            display: inline-block;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transform: translateX(20px); /* Shift slightly to the right */
+        }
+
+        /* Logo image */
+        .logo-image {
+            height: 130px;
+            width: auto;
+            display: block;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #b905dd;
+            text-shadow: 0 0 5px #b905dd;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            color: #ffffff;
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        /* Cart Button at Top Right */
+        .cart-button-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .cart-button {
+            background: linear-gradient(45deg, #ff00ff, #ff66cc);
+            padding: 12px 24px;
+            border-radius: 5px;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #ffffff;
+            text-decoration: none;
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
+            transition: transform 0.2s, box-shadow 0.3s;
+        }
+
+        .cart-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.7);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .contact-section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #b905dd;
+            text-shadow: 0 0 10px #b905dd;
+        }
+
+        .contact-info {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 30px;
+            max-width: 600px;
+            margin: 0 auto;
+            transition: box-shadow 0.3s;
+        }
+
+        .contact-info:hover {
+            box-shadow: 0 0 15px rgba(0, 234, 255, 0.5);
+        }
+
+        .contact-info p {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #cccccc;
+        }
+
+        .contact-info a {
+            color: #b905dd;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+
+        .contact-info a:hover {
+            color: #ffffff;
+            text-shadow: 0 0 5px #b905dd;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            margin-top: 40px;
+        }
+
+        footer a {
+            color: #b905dd;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            nav {
+                display: none;
+            }
+
+            nav.active {
+                display: block;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: rgba(11, 15, 26, 0.9);
+                padding: 20px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+
+            .contact-info {
+                padding: 20px;
+            }
+
+            .contact-info p, .contact-info a {
+                font-size: 1rem;
+            }
+
+            .cart-button {
+                padding: 10px 20px;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="cart-button-container">
+                <a href="cart.html" class="cart-button">🛒</a>
+            </div>
+            <a href="index.html" class="logo-button">
+                <img src="123.png" alt="Logo" class="logo-image">
+            </a>
+            <div class="menu-toggle">☰</div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="contact-section">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <div class="contact-info">
+                <p>Reach out to us for any inquiries or support!</p>
+                <p><strong>WhatsApp:</strong> <a href=""></a>Mint</p>
+                <p><strong>Instagram:</strong> <a href="https://www.instagram.com/ttrump_eg/">@ttrump_eg</a></p>
+                <p><strong>Email:</strong> <a href="mailto:support@l8streetwear.com">@ttrump_eg.com</a></p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>
+                <a href="https://wa.me/1234567890">WhatsApp</a> |
+                <a href="https://instagram.com/l8streetwear">Instagram</a> |
+                <a href="mailto:support@l8streetwear.com">Email</a> |
+                <a href="#">Shipping Policy</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.menu-toggle').addEventListener('click', () => {
+            document.querySelector('nav').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

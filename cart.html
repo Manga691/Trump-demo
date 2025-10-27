@@ -1,0 +1,548 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trump - Cart</title>
+    <link rel="icon" type="image/png" href="123.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(180deg, #000000 0%, #000211 50%, #02000a 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center children horizontally */
+            justify-content: center;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+        }
+
+        /* Logo button */
+        .logo-button {
+            display: inline-block;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transform: translateX(20px); /* Shift slightly to the right */
+        }
+
+        /* Logo image */
+        .logo-image {
+            height: 130px;
+            width: auto;
+            display: block;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #b905dd;
+            text-shadow: 0 0 5px #b905dd;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            color: #ffffff;
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        /* Cart Button at Top Right */
+        .cart-button-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .cart-button {
+            background: linear-gradient(45deg, #ff00ff, #ff66cc);
+            padding: 12px 24px;
+            border-radius: 5px;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #ffffff;
+            text-decoration: none;
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
+            transition: transform 0.2s, box-shadow 0.3s;
+        }
+
+        .cart-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.7);
+        }
+
+        /* Cart Section */
+        .cart-section {
+            margin: 40px 0;
+            display: none; /* Hidden by default */
+        }
+
+        .cart-section.active {
+            display: block; /* Shown when cart has items */
+        }
+
+        .cart-section h2 {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #b905dd;
+            text-shadow: 0 0 10px #b905dd;
+        }
+
+        .cart-items {
+            display: grid;
+            gap: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            transition: box-shadow 0.3s;
+        }
+
+        .cart-item:hover {
+            box-shadow: 0 0 15px rgba(0, 234, 255, 0.5);
+        }
+
+        .cart-item img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-right: 20px;
+        }
+
+        .cart-item-details {
+            flex-grow: 1;
+        }
+
+        .cart-item-details h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .cart-item-details p {
+            font-size: 0.9rem;
+            color: #cccccc;
+            margin-bottom: 5px;
+        }
+
+        .remove-btn {
+            background: none;
+            border: none;
+            color: #ff4d4d;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        /* Summary Section */
+        .cart-summary {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 20px;
+            max-width: 500px;
+            margin-left: auto;
+        }
+
+        .cart-summary h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #b905dd;
+            text-shadow: 0 0 5px #b905dd;
+        }
+
+        .cart-summary p {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .coupon-field {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .coupon-field input {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #b905dd;
+            color: #000000;
+            padding: 10px;
+            border-radius: 5px;
+            flex-grow: 1;
+        }
+
+        .coupon-field button {
+            background: linear-gradient(45deg, #b905dd, #5b3be3);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: #ffffff;
+            cursor: pointer;
+            text-shadow: 0 0 5px #000000;
+            box-shadow: 0 0 10px rgba(0, 234, 255, 0.5);
+        }
+
+        .coupon-message {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #b905dd;
+            display: none;
+        }
+
+        .coupon-message.error {
+            color: #ff4d4d;
+        }
+
+        .payment-option {
+            margin-top: 10px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .payment-option input[type="radio"] {
+            accent-color: #b905dd;
+            transform: scale(1.5);
+        }
+
+        .cart-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        .cart-buttons a, .cart-buttons button {
+            background: linear-gradient(45deg, #b905dd, #5b3be3);
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            color: #ffffff;
+            text-decoration: none;
+            cursor: pointer;
+            text-shadow: 0 0 5px #000000;
+            box-shadow: 0 0 10px rgba(0, 234, 255, 0.5);
+            transition: transform 0.2s;
+        }
+
+        .cart-buttons a.disabled {
+            background: #666;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .cart-buttons a.disabled:hover {
+            transform: none;
+        }
+
+        .cart-buttons a:hover:not(.disabled), .cart-buttons button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Empty Cart Section */
+        .empty-cart {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .empty-cart p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #cccccc;
+        }
+
+        .empty-cart a {
+            background: linear-gradient(45deg, #b905dd, #5b3be3);
+            padding: 12px 20px;
+            border-radius: 5px;
+            color: #ffffff;
+            text-decoration: none;
+            box-shadow: 0 0 10px rgba(0, 234, 255, 0.5);
+            transition: transform 0.2s;
+        }
+
+        .empty-cart a:hover {
+            transform: scale(1.05);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            nav {
+                display: none;
+            }
+
+            nav.active {
+                display: block;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: rgba(11, 15, 26, 0.9);
+                padding: 20px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+
+            .cart-item {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .cart-item img {
+                margin-bottom: 10px;
+            }
+
+            .cart-summary {
+                max-width: 100%;
+            }
+
+            .cart-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .cart-button {
+                padding: 10px 20px;
+                font-size: 1.2rem;
+            }
+
+            .empty-cart p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="cart-button-container">
+                <a href="cart.html" class="cart-button">🛒</a>
+            </div>
+            <a href="index.html" class="logo-button">
+                <img src="123.png" alt="Logo" class="logo-image">
+            </a>
+            <div class="menu-toggle">☰</div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="cart-section" id="cart-section">
+        <div class="container">
+            <h2>Your Cart</h2>
+            <div class="cart-items" id="cart-items">
+                <!-- Cart items will be populated dynamically -->
+            </div>
+            <div class="cart-summary" id="cart-summary">
+                <h3>Order Summary</h3>
+                <p>Subtotal: <span id="subtotal">$0.00</span></p>
+                <p>Discount: <span id="discount">$0.00</span></p>
+                <p>Shipping: <span>$65.00</span></p>
+                <p><strong>Total: <span id="total">$0.00</strong></p>
+                <div class="coupon-field">
+                    <input type="text" id="coupon-code" placeholder="Enter Coupon Code">
+                    <button onclick="applyCoupon()">Apply</button>
+                </div>
+                <p class="coupon-message" id="coupon-message"></p>
+                <div class="payment-option">
+                    <input type="radio" id="cash-on-delivery" name="payment-method">
+                    <label for="cash-on-delivery">Cash on Delivery</label>
+                </div>
+                <div class="cart-buttons">
+                    <a href="checkout.html" id="checkout-button" class="disabled">Checkout</a>
+                    <a href="shop.html">Continue Shopping</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="empty-cart" id="empty-cart">
+        <div class="container">
+            <p>Your cart is empty.</p>
+            <a href="shop.html">Continue Shopping</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>
+                <a href="https://wa.me/1234567890">WhatsApp</a> |
+                <a href="https://instagram.com/l8streetwear">Instagram</a> |
+                <a href="mailto:support@l8streetwear.com">Email</a> |
+                <a href="#">Shipping Policy</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.menu-toggle').addEventListener('click', () => {
+            document.querySelector('nav').classList.toggle('active');
+        });
+
+        let appliedCoupon = localStorage.getItem('appliedCoupon');
+        const coupons = Array.from({length: 50}, (_, i) => `L8COUPON${(i + 1).toString().padStart(2, '0')}`.toUpperCase());
+
+        // Load cart items from localStorage
+        function loadCart() {
+            const cartSection = document.getElementById('cart-section');
+            const emptyCartSection = document.getElementById('empty-cart');
+            const cartItemsContainer = document.getElementById('cart-items');
+            const subtotalElement = document.getElementById('subtotal');
+            const discountElement = document.getElementById('discount');
+            const totalElement = document.getElementById('total');
+            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+            if (cart.length === 0) {
+                cartSection.style.display = 'none';
+                emptyCartSection.style.display = 'block';
+            } else {
+                cartSection.style.display = 'block';
+                emptyCartSection.style.display = 'none';
+                cartItemsContainer.innerHTML = ''; // Clear existing items
+                let subtotal = 0;
+
+                cart.forEach((item, index) => {
+                    const itemTotal = item.price * item.quantity;
+                    subtotal += itemTotal;
+
+                    const cartItem = document.createElement('div');
+                    cartItem.classList.add('cart-item');
+                    cartItem.innerHTML = `
+                        <img src="${item.image}" alt="${item.name}">
+                        <div class="cart-item-details">
+                            <h3>${item.name}</h3>
+                            <p>Size: ${item.size}</p>
+                            <p>Price: $${item.price.toFixed(2)}</p>
+                            <p>Quantity: ${item.quantity}</p>
+                            <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
+                        </div>
+                    `;
+                    cartItemsContainer.appendChild(cartItem);
+                });
+
+                let discount = 0;
+                if (appliedCoupon && coupons.includes(appliedCoupon.toUpperCase())) {
+                    discount = subtotal * 0.25; // 25% discount
+                }
+
+                const shipping = 65.00;
+                subtotalElement.textContent = `$${subtotal.toFixed(2)}`;
+                discountElement.textContent = `-$${discount.toFixed(2)}`;
+                totalElement.textContent = `$${(subtotal - discount + shipping).toFixed(2)}`;
+            }
+
+            updateCheckoutButton();
+        }
+
+        // Remove item
+        function removeItem(index) {
+            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            loadCart();
+        }
+
+        // Apply coupon
+        function applyCoupon() {
+            const couponCode = document.getElementById('coupon-code').value.trim().toUpperCase();
+            const couponMessage = document.getElementById('coupon-message');
+            if (coupons.includes(couponCode)) {
+                appliedCoupon = couponCode;
+                localStorage.setItem('appliedCoupon', appliedCoupon);
+                couponMessage.textContent = 'Coupon applied! 25% off your subtotal.';
+                couponMessage.classList.remove('error');
+                couponMessage.style.display = 'block';
+            } else {
+                appliedCoupon = null;
+                localStorage.removeItem('appliedCoupon');
+                couponMessage.textContent = 'Invalid coupon code.';
+                couponMessage.classList.add('error');
+                couponMessage.style.display = 'block';
+            }
+            loadCart();
+        }
+
+        // Update checkout button state
+        function updateCheckoutButton() {
+            const checkoutButton = document.getElementById('checkout-button');
+            const cashOnDelivery = document.getElementById('cash-on-delivery');
+            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+            if (cashOnDelivery.checked && cart.length > 0) {
+                checkoutButton.classList.remove('disabled');
+            } else {
+                checkoutButton.classList.add('disabled');
+            }
+        }
+
+        // Event listener for cash on delivery radio button
+        document.getElementById('cash-on-delivery').addEventListener('change', updateCheckoutButton);
+
+        // Prevent checkout if disabled
+        document.getElementById('checkout-button').addEventListener('click', (e) => {
+            if (e.target.classList.contains('disabled')) {
+                e.preventDefault();
+                alert('Please select Cash on Delivery and ensure your cart is not empty to proceed to checkout.');
+            }
+        });
+
+        // Initial load
+        loadCart();
+    </script>
+</body>
+</html>

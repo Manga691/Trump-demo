@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>trump- Shop</title>
+    <link rel="icon" type="image/png" href="123.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(180deg, #000000 0%, #000211 50%, #02000a 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+        }
+
+        .logo-button {
+            display: inline-block;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transform: translateX(10px);
+        }
+
+        .logo-image {
+            height: 170px;
+            width: auto;
+            display: block;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #b905dd;
+            text-shadow: 0 0 5px #b905dd;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            color: #ffffff;
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        .cart-button-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .cart-button {
+            background: linear-gradient(45deg, #ff00ff, #ff66cc);
+            padding: 12px 24px;
+            border-radius: 5px;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #ffffff;
+            text-decoration: none;
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
+            transition: transform 0.2s, box-shadow 0.3s;
+        }
+
+        .cart-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.7);
+        }
+
+        .shop {
+            margin: 40px 0;
+        }
+
+        .shop h2 {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #b905dd;
+            text-shadow: 0 0 10px #b905dd;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            transition: box-shadow 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .product-card:hover {
+            box-shadow: 0 0 15px rgba(0, 234, 255, 0.5);
+        }
+
+        .sold-out-label {
+            position: absolute;
+            top: -15px;
+            right: -20px;
+            background: linear-gradient(45deg, #500101, #ff8888);
+            color: #ffffff;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            z-index: 10;
+            transform: rotate(15deg) skewX(10deg);
+            box-shadow: 5px 5px 20px rgba(0,0,0,0.4), 0 0 15px rgba(255, 0, 0, 0.6);
+        }
+
+        .in-stock-label {
+            position: absolute;
+            top: -15px;
+            right: -20px;
+            background: linear-gradient(45deg, #004b00, #015501);
+            color: #ffffff;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            z-index: 10;
+            transform: rotate(15deg) skewX(10deg);
+            box-shadow: 5px 5px 20px rgba(0,0,0,0.4), 0 0 15px rgba(0, 255, 0, 0.6);
+        }
+
+        .product-image-carousel {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .product-image-inner {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            object-fit: contain;
+            border-radius: 5px;
+            flex: 0 0 100%;
+        }
+
+        .product-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .product-card .price-container {
+            font-size: 1rem;
+            color: #cccccc;
+            margin-bottom: 10px;
+        }
+
+        .product-card .original-price {
+            text-decoration: line-through;
+            color: #ff4444;
+            margin-right: 10px;
+        }
+
+        .product-card .sale-price {
+            color: #00cc00;
+            font-weight: 600;
+        }
+
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: #ffffff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            border-radius: 5px;
+        }
+
+        .carousel-arrow.left {
+            left: 5px;
+        }
+
+        .carousel-arrow.right {
+            right: 5px;
+        }
+
+        .notification {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #1a1a2e;
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(163, 0, 155, 0.5);
+            z-index: 1000;
+        }
+
+        .notification-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #b905dd;
+            text-shadow: 0 0 5px #b905dd;
+        }
+
+        .notification-content .error-message {
+            color: #ff4444;
+            font-size: 1rem;
+            margin-bottom: 10px;
+            display: none;
+        }
+
+        .notification-content p.description {
+            font-size: 1rem;
+            color: #cccccc;
+            margin-bottom: 15px;
+        }
+
+        .notification-content .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .notification-content select, .notification-content input[type="number"] {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #b905dd;
+            color: #550303;
+            padding: 8px;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        .notification-content .price {
+            font-size: 1.2rem;
+            color: #cccccc;
+            margin-bottom: 15px;
+        }
+
+        .notification-content .original-price {
+            text-decoration: line-through;
+            color: #ff4444;
+            margin-right: 10px;
+        }
+
+        .notification-content .sale-price {
+            color: #00cc00;
+            font-weight: 600;
+        }
+
+        .notification-content button {
+            background: linear-gradient(45deg, #b905dd, #5b3be3);
+            padding: 20px 20px;
+            border-radius: 5px;
+            color: #ffffff;
+            border: none;
+            box-shadow: 0 0 10px rgba(63, 0, 49, 0.5);
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+
+        .notification-content button:hover {
+            transform: scale(1.05);
+        }
+
+        .close-notification {
+        position: absolute;
+        top: 5px;
+        right: 5px; /* بدل right */
+        width: 40px; /* Larger hit area */
+        height: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        background: linear-gradient(45deg, #b905dd, #5b3be3);
+        color: #ffffff;
+        border-radius: 50%;
+        font-size: 1.8rem;
+        box-shadow: 0 0 10px rgba(163,0,155,0.5);
+        transition: transform 0.2s, box-shadow 0.3s;
+        border: none;
+        padding: 0;
+        text-align: center;
+        line-height: 50px;
+    }
+
+          
+        .close-notification:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(163,0,155,0.7);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            margin-top: 40px;
+        }
+
+        footer a {
+            color: #b905dd;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            nav {
+                display: none;
+            }
+
+            nav.active {
+                display: block;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: rgba(11, 15, 26, 0.9);
+                padding: 20px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+
+            .shop h2 {
+                font-size: 1.8rem;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .product-image-carousel {
+                height: 200px;
+            }
+
+            .product-image {
+                height: 200px;
+            }
+
+            .notification {
+                width: 95%;
+            }
+
+            .cart-button {
+                padding: 10px 20px;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Rest of HTML and JS same as your original code -->
+
+    <header>
+        <div class="container">
+            <div class="cart-button-container">
+                <a href="cart.html" class="cart-button">🛒</a>
+            </div>
+            <a href="index.html" class="logo-button">
+                <img src="123.png" alt="Logo" class="logo-image">
+            </a>
+            <div class="menu-toggle">☰</div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="shop">
+        <div class="container">
+            <h2>Shop All Products</h2>
+            <div class="product-grid">
+                <div class="product-card" data-name="Galaxy T-Shirt" data-original-price="30.00" data-sale-price="25.00" data-description="A vibrant T-shirt with a cosmic design." data-images='["test/15.png","test/16.png","https://picsum.photos/100/100?random=3","https://picsum.photos/100/100?random=4"]' data-sizes='["S","M","L"]'>
+                    <span class="in-stock-label">In Stock</span>
+                    <div class="product-image-carousel">
+                        <div class="product-image-inner">
+                            <img class="product-image" src="test/1m.png" alt="Galaxy T-Shirt" loading="lazy">
+                        </div>
+                        <button class="carousel-arrow left">&larr;</button>
+                        <button class="carousel-arrow right">&rarr;</button>
+                    </div>
+                    <h3>Galaxy T-Shirt</h3>
+                    <div class="price-container">
+                        <span class="original-price">$30.00</span>
+                        <span class="sale-price">$25.00</span>
+                    </div>
+                </div>
+                <div class="product-card" data-name="Nebula Hoodie" data-original-price="50.00" data-sale-price="45.00" data-description="A cozy hoodie with a nebula-inspired print." data-images='["https://picsum.photos/100/100?random=7","https://picsum.photos/100/100?random=8","https://picsum.photos/100/100?random=9","https://picsum.photos/100/100?random=10"]' data-sizes='["M","L","XL"]'>
+                    <span class="in-stock-label">In Stock</span>
+                    <div class="product-image-carousel">
+                        <div class="product-image-inner">
+                            <img class="product-image" src="123.png" alt="Nebula Hoodie" loading="lazy">
+                        </div>
+                        <button class="carousel-arrow left">&larr;</button>
+                        <button class="carousel-arrow right">&rarr;</button>
+                    </div>
+                    <h3>Nebula Hoodie</h3>
+                    <div class="price-container">
+                        <span class="original-price">$50.00</span>
+                        <span class="sale-price">$45.00</span>
+                    </div>
+                </div>
+                <div class="product-card" data-name="Starlight T-Shirt" data-original-price="35.00" data-sale-price="28.00" data-description="A sleek T-shirt with glowing star patterns." data-images='["https://picsum.photos/100/100?random=13","https://picsum.photos/100/100?random=14","https://picsum.photos/100/100?random=15","https://picsum.photos/100/100?random=16"]' data-sizes='["S","L","XL"]'>
+                    <span class="in-stock-label">20 Pieces left</span>
+                    <div class="product-image-carousel">
+                        <div class="product-image-inner">
+                            <img class="product-image" src="123.png" alt="Starlight T-Shirt" loading="lazy">
+                        </div>
+                        <button class="carousel-arrow left">&larr;</button>
+                        <button class="carousel-arrow right">&rarr;</button>
+                    </div>
+                    <h3>Starlight T-Shirt</h3>
+                    <div class="price-container">
+                        <span class="original-price">$35.00</span>
+                        <span class="sale-price">$28.00</span>
+                    </div>
+                </div>
+                <div class="product-card" data-name="Cosmic Hoodie" data-original-price="60.00" data-sale-price="50.00" data-description="A premium hoodie with a galaxy gradient." data-images='["https://picsum.photos/100/100?random=19","https://picsum.photos/100/100?random=20","https://picsum.photos/100/100?random=21","https://picsum.photos/100/100?random=22"]' data-sizes='["M","XL"]'>
+                    <span class="sold-out-label">Sold Out</span>
+                    <div class="product-image-carousel">
+                        <div class="product-image-inner">
+                            <img class="product-image" src="123.png" alt="Cosmic Hoodie" loading="lazy">
+                        </div>
+                        <button class="carousel-arrow left">&larr;</button>
+                        <button class="carousel-arrow right">&rarr;</button>
+                    </div>
+                    <h3>Cosmic Hoodie</h3>
+                    <div class="price-container">
+                        <span class="original-price">$60.00</span>
+                        <span class="sale-price">$50.00</span>
+                    </div>
+                </div>
+                <div class="product-card" data-name="Meteor Jacket" data-original-price="500.00" data-sale-price="450.00" data-description="A sleek jacket with a meteor-inspired design." data-images='["https://picsum.photos/100/100?random=25","https://picsum.photos/100/100?random=26","https://picsum.photos/100/100?random=27","https://picsum.photos/100/100?random=28"]' data-sizes='["S","M"]'>
+                    <span class="sold-out-label">Sold Out</span>
+                    <div class="product-image-carousel">
+                        <div class="product-image-inner">
+                            <img class="product-image" src="123.png" alt="Meteor Jacket" loading="lazy">
+                        </div>
+                        <button class="carousel-arrow left">&larr;</button>
+                        <button class="carousel-arrow right">&rarr;</button>
+                    </div>
+                    <h3>Meteor Jacket</h3>
+                    <div class="price-container">
+                        <span class="original-price">$500.00</span>
+                        <span class="sale-price">$450.00</span>
+                    </div>
+                </div>
+                <div class="product-card" data-name="Orbit Cap" data-original-price="25.00" data-sale-price="20.00" data-description="A stylish cap with an orbital pattern." data-images='["https://picsum.photos/100/100?random=31","https://picsum.photos/100/100?random=32","https://picsum.photos/100/100?random=33","https://picsum.photos/100/100?random=34"]' data-sizes='["S","M","L","XL"]'>
+                    <span class="in-stock-label">In Stock</span>
+                    <div class="product-image-carousel">
+                        <div class="product-image-inner">
+                            <img class="product-image" src="123.png" alt="Orbit Cap" loading="lazy">
+                        </div>
+                        <button class="carousel-arrow left">&larr;</button>
+                        <button class="carousel-arrow right">&rarr;</button>
+                    </div>
+                    <h3>Orbit Cap</h3>
+                    <div class="price-container">
+                        <span class="original-price">$25.00</span>
+                        <span class="sale-price">$20.00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="notification" id="product-notification">
+        <div class="notification-content">
+            <span class="close-notification">&times;</span>
+            <div class="product-image-carousel">
+                <div class="product-image-inner" id="notification-image-inner"></div>
+                <button class="carousel-arrow left" id="notification-carousel-left">&larr;</button>
+                <button class="carousel-arrow right" id="notification-carousel-right">&rarr;</button>
+            </div>
+            <h3 id="notification-name"></h3>
+            <p class="description" id="notification-description"></p>
+            <p class="error-message" id="error-message"></p>
+            <div class="options">
+                <select id="notification-size" required>
+                    <option value="" disabled selected>Select Size</option>
+                </select>
+                <input type="number" id="notification-quantity" min="1" value="1">
+            </div>
+            <p class="price">
+                <span id="notification-original-price"></span>
+                <span id="notification-sale-price"></span>
+            </p>
+            <button id="notification-add-to-cart">Add to Cart</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>
+                <a href="">min</a> |
+                <a href="https://www.instagram.com/ttrump_eg/">ttrump_eg</a> |
+                <a href="mailto:support@l8streetwear.com">Email</a> |
+                <a href="#">Shipping Policy</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.menu-toggle').addEventListener('click', () => {
+            document.querySelector('nav').classList.toggle('active');
+        });
+
+        // Individual product image carousel functionality
+        const productCards = document.querySelectorAll('.product-card');
+        productCards.forEach(card => {
+            const imageInner = card.querySelector('.product-image-inner');
+            const images = JSON.parse(card.getAttribute('data-images'));
+            const leftArrow = card.querySelector('.carousel-arrow.left');
+            const rightArrow = card.querySelector('.carousel-arrow.right');
+            const imageCarousel = card.querySelector('.product-image-carousel');
+            let currentImageIndex = 0;
+
+            // Update carousel with current image
+            function updateImageCarousel() {
+                imageInner.innerHTML = '';
+                const img = document.createElement('img');
+                img.className = 'product-image';
+                img.src = images[currentImageIndex];
+                img.alt = card.getAttribute('data-name') + ' view';
+                img.loading = 'lazy';
+                img.addEventListener('error', () => {
+                    console.error(`Failed to load image: ${img.src}`);
+                    img.src = 'https://picsum.photos/100/100?random=0';
+                    img.alt = 'Image Not Found';
+                });
+                imageInner.appendChild(img);
+                imageInner.style.transform = `translateX(0)`; // Single image, no translation
+            }
+
+            leftArrow.addEventListener('click', () => {
+                currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+                updateImageCarousel();
+            });
+
+            rightArrow.addEventListener('click', () => {
+                currentImageIndex = (currentImageIndex + 1) % images.length;
+                updateImageCarousel();
+            });
+
+            // Add swipe for product image carousel
+            let startXImage, endXImage;
+            imageCarousel.addEventListener('touchstart', (e) => {
+                startXImage = e.touches[0].clientX;
+            });
+            imageCarousel.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+            });
+            imageCarousel.addEventListener('touchend', (e) => {
+                endXImage = e.changedTouches[0].clientX;
+                const deltaX = endXImage - startXImage;
+                const threshold = 50;
+                if (deltaX > threshold) {
+                    currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+                } else if (deltaX < -threshold) {
+                    currentImageIndex = (currentImageIndex + 1) % images.length;
+                }
+                updateImageCarousel();
+            });
+
+            // Initial image is already loaded in HTML
+        });
+
+        // Notification functionality
+        const notification = document.getElementById('product-notification');
+        const notificationName = document.getElementById('notification-name');
+        const notificationDescription = document.getElementById('notification-description');
+        const notificationOriginalPrice = document.getElementById('notification-original-price');
+        const notificationSalePrice = document.getElementById('notification-sale-price');
+        const notificationSize = document.getElementById('notification-size');
+        const notificationQuantity = document.getElementById('notification-quantity');
+        const notificationImageInner = document.getElementById('notification-image-inner');
+        const notificationCarouselLeft = document.getElementById('notification-carousel-left');
+        const notificationCarouselRight = document.getElementById('notification-carousel-right');
+        const addToCartButton = document.getElementById('notification-add-to-cart');
+        const closeNotification = document.querySelector('.close-notification');
+        const errorMessage = document.getElementById('error-message');
+
+        productCards.forEach(card => {
+            const isSoldOut = card.querySelector('.sold-out-label');
+            if (!isSoldOut) {
+                card.addEventListener('click', () => {
+                    const name = card.getAttribute('data-name');
+                    const originalPrice = card.getAttribute('data-original-price');
+                    const salePrice = card.getAttribute('data-sale-price');
+                    const description = card.getAttribute('data-description');
+                    const images = JSON.parse(card.getAttribute('data-images'));
+                    const sizes = JSON.parse(card.getAttribute('data-sizes'));
+
+                    // Populate notification carousel with first image only
+                    let currentImageIndex = 0;
+                    const updateNotificationCarousel = () => {
+                        notificationImageInner.innerHTML = '';
+                        const img = document.createElement('img');
+                        img.className = 'product-image';
+                        img.src = images[currentImageIndex];
+                        img.alt = `${name} view`;
+                        img.loading = 'lazy';
+                        img.addEventListener('error', () => {
+                            console.error(`Failed to load notification image: ${img.src}`);
+                            img.src = 'https://picsum.photos/100/100?random=0';
+                            img.alt = 'Image Not Found';
+                        });
+                        notificationImageInner.appendChild(img);
+                        notificationImageInner.style.transform = `translateX(0)`;
+                    };
+                    updateNotificationCarousel();
+
+                    // Notification carousel arrow event listeners
+                    notificationCarouselLeft.addEventListener('click', () => {
+                        currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+                        updateNotificationCarousel();
+                    });
+                    notificationCarouselRight.addEventListener('click', () => {
+                        currentImageIndex = (currentImageIndex + 1) % images.length;
+                        updateNotificationCarousel();
+                    });
+
+                    // Add swipe for notification carousel
+                    const notificationCarousel = notification.querySelector('.product-image-carousel');
+                    let startXNotification, endXNotification;
+                    notificationCarousel.addEventListener('touchstart', (e) => {
+                        startXNotification = e.touches[0].clientX;
+                    });
+                    notificationCarousel.addEventListener('touchmove', (e) => {
+                        e.preventDefault();
+                    });
+                    notificationCarousel.addEventListener('touchend', (e) => {
+                        endXNotification = e.changedTouches[0].clientX;
+                        const deltaX = endXNotification - startXNotification;
+                        const threshold = 50;
+                        if (deltaX > threshold) {
+                            currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+                        } else if (deltaX < -threshold) {
+                            currentImageIndex = (currentImageIndex + 1) % images.length;
+                        }
+                        updateNotificationCarousel();
+                    });
+
+                    // Populate size dropdown
+                    notificationSize.innerHTML = '<option value="" disabled selected>Select Size</option>';
+                    sizes.forEach(size => {
+                        const option = document.createElement('option');
+                        option.value = size;
+                        option.textContent = size;
+                        notificationSize.appendChild(option);
+                    });
+
+                    notificationName.textContent = name;
+                    notificationDescription.textContent = description;
+                    notificationOriginalPrice.textContent = `$${originalPrice}`;
+                    notificationOriginalPrice.classList.add('original-price');
+                    notificationSalePrice.textContent = `$${salePrice}`;
+                    notificationSalePrice.classList.add('sale-price');
+                    notificationSize.value = '';
+                    notificationQuantity.value = '1';
+                    notification.style.display = 'block';
+                });
+            }
+        });
+
+        closeNotification.addEventListener('click', () => {
+            notification.style.display = 'none';
+        });
+
+        notification.addEventListener('click', (e) => {
+            if (e.target === notification) {
+                notification.style.display = 'none';
+            }
+        });
+
+        addToCartButton.addEventListener('click', () => {
+            const size = notificationSize.value;
+            const quantity = parseInt(notificationQuantity.value);
+
+            errorMessage.style.display = 'none';
+
+            if (!size) {
+                errorMessage.textContent = 'Please select a size.';
+                errorMessage.style.display = 'block';
+                return;
+            }
+            if (quantity < 1) {
+                errorMessage.textContent = 'Please select a valid quantity.';
+                errorMessage.style.display = 'block';
+                return;
+            }
+
+            const item = {
+                name: notificationName.textContent,
+                price: parseFloat(notificationSalePrice.textContent.replace('$', '')),
+                size: size,
+                quantity: quantity,
+                image: notificationImageInner.querySelector('.product-image').src
+            };
+
+            try {
+                let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+                cart.push(item);
+                localStorage.setItem('cart', JSON.stringify(cart));
+                notification.style.display = 'none';
+                // Show success notification
+                const successNotification = document.createElement('div');
+                successNotification.className = 'notification';
+                successNotification.innerHTML = `
+                    <div class="notification-content">
+                        <span class="close-notification">&times;</span>
+                        <p>Item added to cart successfully!</p>
+                    </div>
+                `;
+                document.body.appendChild(successNotification);
+                setTimeout(() => {
+                    successNotification.style.display = 'block';
+                    setTimeout(() => {
+                        successNotification.remove();
+                    }, 2000);
+                }, 100);
+                successNotification.querySelector('.close-notification').addEventListener('click', () => {
+                    successNotification.remove();
+                });
+            } catch (error) {
+                console.error('Error saving to localStorage:', error);
+                errorMessage.textContent = 'An error occurred while adding to cart. Please try again.';
+                errorMessage.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L8 - Order Confirmation</title>
+    <link rel="icon" type="image/png" href="123.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(180deg, #000000 0%, #000211 50%, #02000a 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+        }
+
+        .logo-button {
+            display: inline-block;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transform: translateX(20px);
+        }
+
+        .logo-image {
+            height: 130px;
+            width: auto;
+            display: block;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #b905dd;
+            text-shadow: 0 0 5px #b905dd;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            color: #ffffff;
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        .cart-button-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .cart-button {
+            background: linear-gradient(45deg, #ff00ff, #ff66cc);
+            padding: 12px 24px;
+            border-radius: 5px;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #ffffff;
+            text-decoration: none;
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
+            transition: transform 0.2s, box-shadow 0.3s;
+        }
+
+        .cart-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.7);
+        }
+
+        .confirmation-section {
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .confirmation-section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #b905dd;
+            text-shadow: 0 0 10px #b905dd;
+        }
+
+        .confirmation-info {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 30px;
+            max-width: 600px;
+            margin: 0 auto;
+            transition: box-shadow 0.3s;
+        }
+
+        .confirmation-info:hover {
+            box-shadow: 0 0 15px rgba(0, 234, 255, 0.5);
+        }
+
+        .confirmation-info p {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #cccccc;
+        }
+
+        .confirmation-items {
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .confirmation-items h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #b905dd;
+            text-shadow: 0 0 5px #b905dd;
+        }
+
+        .confirmation-item {
+            margin-bottom: 10px;
+            color: #cccccc;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            margin-top: 40px;
+        }
+
+        footer a {
+            color: #b905dd;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        footer a:hover {
+            color: #ff66cc;
+            text-shadow: 0 0 5px #ff66cc;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            nav {
+                display: none;
+            }
+
+            nav.active {
+                display: block;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: rgba(11, 15, 26, 0.9);
+                padding: 20px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+
+            .confirmation-section h2 {
+                font-size: 1.8rem;
+            }
+
+            .confirmation-info {
+                padding: 20px;
+            }
+
+            .confirmation-info p, .confirmation-items h3, .confirmation-item {
+                font-size: 1rem;
+            }
+
+            .cart-button {
+                padding: 10px 20px;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="cart-button-container">
+                <a href="cart.html" class="cart-button">🛒</a>
+            </div>
+            <a href="index.html" class="logo-button">
+                <img src="123.png" alt="Logo" class="logo-image">
+            </a>
+            <div class="menu-toggle">☰</div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="confirmation-section">
+        <div class="container">
+            <h2>Thank You for Your Order!</h2>
+            <div class="confirmation-info">
+                <p id="order-id"></p>
+                <p id="customer-name"></p>
+                <p id="email"></p>
+                <p id="phone1"></p>
+                <p id="phone2"></p>
+                <p id="city"></p>
+                <p id="address"></p>
+                <p id="google-location"></p>
+                <p id="building-num"></p>
+                <p id="floor-num"></p>
+                <p id="apartment-num"></p>
+                <div class="confirmation-items">
+                    <h3>Ordered Items:</h3>
+                    <div id="ordered-items"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>
+                <a href="https://wa.me/1234567890">WhatsApp</a> |
+                <a href="https://instagram.com/l8streetwear">Instagram</a> |
+                <a href="mailto:support@l8streetwear.com">Email</a> |
+                <a href="#">Shipping Policy</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.menu-toggle').addEventListener('click', () => {
+            document.querySelector('nav').classList.toggle('active');
+        });
+
+        // Load order details from localStorage
+        function loadOrderDetails() {
+            const order = JSON.parse(localStorage.getItem('lastOrder') || '{}');
+
+            document.getElementById('order-id').textContent = `Order ID: ${order.orderId || 'N/A'}`;
+            document.getElementById('customer-name').textContent = `Customer Name: ${order.firstName || 'N/A'} ${order.lastName || 'N/A'}`;
+            document.getElementById('email').textContent = `Email: ${order.email || 'N/A'}`;
+            document.getElementById('phone1').textContent = `First Phone Number: ${order.phone1 || 'N/A'}`;
+            document.getElementById('phone2').textContent = `Second Phone Number: ${order.phone2 || 'N/A'}`;
+            document.getElementById('city').textContent = `City: ${order.city || 'N/A'}`;
+            document.getElementById('address').textContent = `Address: ${order.address || 'N/A'}`;
+            document.getElementById('google-location').textContent = `Google Location: ${order.googleLocation || 'N/A'}`;
+            document.getElementById('building-num').textContent = `Building Number: ${order.buildingNum || 'N/A'}`;
+            document.getElementById('floor-num').textContent = `Floor Number: ${order.floorNum || 'N/A'}`;
+            document.getElementById('apartment-num').textContent = `Apartment Number: ${order.apartmentNum || 'N/A'}`;
+
+            const orderedItems = document.getElementById('ordered-items');
+            orderedItems.innerHTML = ''; // Clear existing items
+            if (order.cart && order.cart.length > 0) {
+                order.cart.forEach(item => {
+                    const itemElem = document.createElement('p');
+                    itemElem.classList.add('confirmation-item');
+                    itemElem.textContent = `${item.name} - Size: ${item.size}, Quantity: ${item.quantity}`;
+                    orderedItems.appendChild(itemElem);
+                });
+            } else {
+                orderedItems.innerHTML = '<p>No items in order.</p>';
+            }
+        }
+
+        // Initial load
+        loadOrderDetails();
+    </script>
+</body>
+</html>
