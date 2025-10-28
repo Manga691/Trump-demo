@@ -367,7 +367,7 @@
             const message = `@everyone\n**New Order Details (Order ID: ${orderId})**\n\n**Customer Information:**\n1. First Name: ${firstName}\n2. Email: ${email}\n3. Last Name: ${lastName}\n4. First Phone Number: ${phone1}\n5. Second Phone Number: ${phone2 || 'N/A'}\n6. City: ${city}\n7. Address: ${address}\n8. Google Location: ${googleLocation || 'N/A'}\n9. Building Number: ${buildingNum}\n10. Floor Number: ${floorNum}\n11. Apartment Number: ${apartmentNum}\n\n**Cart Items:**\n${cartDetails}\n\n**Order Summary:**\nSubtotal: $${subtotal.toFixed(2)}\nDiscount: -$${discount.toFixed(2)}\nShipping: $${shipping.toFixed(2)}\nTotal: $${total.toFixed(2)}`;
 
             // Send to Discord webhook
-            fetch('https://discord.com/api/webhooks/1432083878742331493/S2ctf0Nx6GS_gKK34TTVC1JGf39ml6Gjysjz0FDq9odHs1OWfBTfUQ518MvelThRhyqZ', {
+            fetch('https://eobx2ktap828iyq.m.pipedream.net/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
